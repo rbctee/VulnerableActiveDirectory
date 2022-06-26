@@ -58,7 +58,7 @@ After you'll install Active Directory, you'll need to change the username:
 DC1\Administrator -> VULNERABLE\Administrator
 
 # or this one (FQDN\Username)
-vulnerable.org\Administrator
+vulnerable.local\Administrator
 ```
 
 ### Set up Active Directory
@@ -79,12 +79,12 @@ Import-Module ADDSDeployment
 
 # Check if the server meets all the requirements to install an Active Directory Forest
 $safe_mode_pass = ConvertTo-SecureString -String "Passw0rd!" -AsPlainText -Force
-Test-ADDSForestInstallation -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.org"
-Test-ADDSForestInstallation -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.org" -CreateDNSDelegation -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true
+Test-ADDSForestInstallation -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.local"
+Test-ADDSForestInstallation -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.local" -CreateDNSDelegation -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true
 
 # Install it
 # -Force skips the confirmation prompt
-Install-ADDSForest -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.org" -CreateDNSDelegation -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true -Force
+Install-ADDSForest -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.local" -CreateDNSDelegation -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true -Force
 ```
 
 The password passed to the parameter `SafeModeAdministratorPassword` is for the *Directory Services Restore Mode* (DSRM).
