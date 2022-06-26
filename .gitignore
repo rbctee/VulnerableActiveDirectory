@@ -2,3 +2,8 @@
 data/*
 !data/surnames.txt
 !data/names.txt
+!automation/
+!automation/vagrant
+!automation/vagrant/*
+!automation/vagrant/floppy/
+!automation/vagrant/floppy/*

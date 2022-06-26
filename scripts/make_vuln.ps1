@@ -1,11 +1,15 @@
-function Add-ContrainedDelegation {
-}
-
-function Add-UnconstrainedDelegation {
+function Add-ContrainedDelegation
+{
 
 }
 
-function Add-KerberosPreAuthentication {
+function Add-UnconstrainedDelegation
+{
+
+}
+
+function Add-KerberosPreAuthentication
+{
     param (
         $sam_account_name
     )
@@ -13,7 +17,8 @@ function Add-KerberosPreAuthentication {
     Get-ADUser -Identity $sam_account_name | Set-ADAccountControl -DoesNotRequirePreAuth:$true
 }
 
-function Add-KerberosPreAuthenticationToRandomUser {
+function Add-KerberosPreAuthenticationToRandomUser
+{
     $filter = "name -notlike 'Administrator' -and name -notlike 'krbtgt' -and name -notlike 'Guest'"
     $users_list = Get-Aduser -Filter $filter
     
@@ -21,7 +26,8 @@ function Add-KerberosPreAuthenticationToRandomUser {
     Add-KerberosPreAuthentication $user.SamAccountName
 }
 
-function Add-KerberosPreAuthenticationToSpecificUser {
+function Add-KerberosPreAuthenticationToSpecificUser
+{
     param (
         [Parameter(Mandatory = $true)]
         $SamAccountName
@@ -30,3 +36,17 @@ function Add-KerberosPreAuthenticationToSpecificUser {
     $user = Get-ADUser -Identity $SamAccountName
     Add-KerberosPreAuthentication $user.SamAccountName
 }
+
+Add-UserSPN
+{
+    param (
+        [Parameter(Mandatory = $true)]
+        $User
+        [Parameter(Mandatory = $true)]
+        $SPN
+    )
+
+    Set-ADUser -Identity $User -ServicePrincipalNames @{Add=$SPN}
+}
+
+
