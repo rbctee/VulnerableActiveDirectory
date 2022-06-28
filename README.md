@@ -84,7 +84,7 @@ Test-ADDSForestInstallation -SafeModeAdministratorPassword $safe_mode_pass -Doma
 
 # Install it
 # -Force skips the confirmation prompt
-Install-ADDSForest -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.org" -CreateDnsDelegation:$false -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true -Force
+Install-ADDSForest -SafeModeAdministratorPassword $safe_mode_pass -DomainName "vulnerable.local" -CreateDnsDelegation:$false -DomainMode Win2012R2 -ForestMode Win2012R2 -DomainNetbiosName "VULNERABLE" -DatabasePath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -LogPath "C:\Windows\NTDS" -InstallDns:$true -Force
 ```
 
 The password passed to the parameter `SafeModeAdministratorPassword` is for the *Directory Services Restore Mode* (DSRM).
